@@ -12,7 +12,7 @@
 
     <heading class="row">
         <h3 class="col" id="highscore-link">High scores</h3>
-        <h3 class="col" id="timer-text">Time :<span id="timer">0</span></h3>
+        <h3 class="col" id="timer-text">Time: <span id="timer">0</span></h3>
     </heading>
     <br>
     <br>
@@ -20,11 +20,11 @@
     <div id="main-box">
         <div id="intro">
             <h1>Code Challenge Quiz</h1>
-        <p>Answer some questions or whatever. I don't care.</p>
+        <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten secons.</p>
         <button class="btn btn-primary" id="start">Start quiz!</button>
         </div>
     
-        <div id="questions">
+        <div class="hide" id="questions">
             <h1>Coding quiz</h1>
             <p id="question-text">Here is a question</p>
             <ol>
@@ -33,17 +33,17 @@
                 <li><button id="choice3" class="btn btn-primary">Answer 3</button></li>
                 <li><button id="choice4" class="btn btn-primary">Answer 4</button></li>
             </ol>
-            <hr>
-            <div id="correct">Correct!</div>
+            <hr class="hide">
+            <div class="hide" id="correct-or-incorrect">Correct!</div>
         </div>
 
-        <div id="results">
+        <div class="hide" id="results">
             <h1>All done!</h1>
             <p>Your final score is <span id="score"></span></p>
             <p>Enter initials: <input type="text" id="input-initials"></p>
         </div>
 
-        <div id="highscores">
+        <div class="hide" id="highscores">
             <h1>High scores:</h1>
             <ol id="highscore-list">
                 <li>Test</li>
