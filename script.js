@@ -1,3 +1,26 @@
+var higscoreLink = document.getElementById("highscore-link");
+var timerText = document.getElementById("timer-text");
+var timerCountdown = document.getElementById("timer");
+var introBox = document.getElementById("intro");
+var startBtn = document.getElementById("start");
+var questionBox = document.getElementById("question");
+var questionText = document.getElementById("question-text");
+var choiceBtn1 = document.getElementById("choice1");
+var choiceBtn2 = document.getElementById("choice2");
+var choiceBtn3 = document.getElementById("choice3");
+var choiceBtn4 = document.getElementById("choice4");
+var correctOrIncorrect = document.getElementById("correct");
+var resultsBox = document.getElementById("results");
+var scoreText = document.getElementById("score");
+var initalsInput = document.getElementById("input-initials");
+var highscoreBox = document.getElementById("highscore");
+var highscoreList = document.getElementById("highscore=list");
+var backBtn = document.getElementById("back");
+var clearBtn = document.getElementById("clear");
+var quizActive = false
+
+
+
 // Commonly used data types do not include:
 // 1. strings
 // 2. booleans
