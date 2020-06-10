@@ -21,7 +21,7 @@ button {
     padding: 10px
 }
 
-#timer-spot {
+#timer-text {
     text-align: right;
     margin-right: 20px;
 }
@@ -30,9 +30,16 @@ button {
     color: fuchsia
 }
 
-#correct {
+.correct {
     color: lightgray;
     text-decoration: underline;
     font-style: italic;
     font-weight: bold;
+}
+
+.incorrect {
+    color: red;
+    text-decoration: underline;
+    font-style: italic;
+    font-weight: bold;  
 }
