@@ -1,0 +1,38 @@
+h1 {
+    text-align: center;
+}
+
+button {
+    margin: 2px;
+}
+
+.btn-primary {
+    background-color: fuchsia;
+    border-color: fuchsia
+}
+
+.hide {
+    display: none;
+}
+
+#main-box {
+    width: 500px;
+    margin: auto;
+    padding: 10px
+}
+
+#timer-spot {
+    text-align: right;
+    margin-right: 20px;
+}
+
+#highscore {
+    color: fuchsia
+}
+
+#correct {
+    color: lightgray;
+    text-decoration: underline;
+    font-style: italic;
+    font-weight: bold;
+}

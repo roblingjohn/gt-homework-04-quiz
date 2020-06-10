@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coding Quiz</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+
+    <heading class="row">
+        <h3 class="col" id="highscore-link">High scores</h3>
+        <h3 class="col" id="timer-spot">Time :<span id="timer">0</span></h3>
+    </heading>
+    <br>
+    <br>
+
+    <div id="main-box">
+        <div id="intro">
+            <h1>Code Challenge Quiz</h1>
+        <p>Answer some questions or whatever. I don't care.</p>
+        </div>
+    
+        <div id="questions">
+            <h1>Coding quiz</h1>
+            <p id="question">Here is a question</p>
+            <ol>
+                <li><button id="ans1" class="btn btn-primary">Answer 1</button></li>
+                <li><button id="ans2" class="btn btn-primary">Answer 2</button></li>
+                <li><button id="ans3" class="btn btn-primary">Answer 3</button></li>
+                <li><button id="ans4" class="btn btn-primary">Answer 4</button></li>
+            </ol>
+            <hr>
+            <div id="correct">Correct!</div>
+        </div>
+
+        <div id="results">
+            <h1>All done!</h1>
+            <p>Your final score is <span id="score"></span></p>
+            <p>Enter initials: <input type="text" id="input-initials"></p>
+        </div>
+
+        <div id="highscores">
+            <h1>High scores:</h1>
+            <ol id="highscore-list">
+                <li>Test</li>
+                <br>
+                <button class="btn btn-primary">Go back</button>
+                <button class="btn btn-primary">Clear scores</button>
+            </ol>
+        </div>
+    </div>
+    
+    
+    <script src="script.js"></script>
+</body>
+</html>
