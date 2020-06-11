@@ -19,6 +19,9 @@ var highscoreList = document.getElementById("highscore=list");
 var backBtn = document.getElementById("back");
 var clearBtn = document.getElementById("clear");
 var quizActive = false
+var secondsLeft = 75
+var interval
+var timeScore
 
 var questionList = [
     "Commonly used data types do not include:", 
@@ -61,10 +64,26 @@ function startQuiz() {
         quizBox.setAttribute("class", "hide")
         resultsBox.setAttribute("class", "")
         quizActive = false
+        scoreText.innerHTML = secondsLeft
     }
+}
 
+function startTimer() {
+    secondsLeft = 74
+    interval = setInterval(function() {
+        if (quizActive === true) {
+            timerCountdown.innerText = secondsLeft
+            secondsLeft--
+        }
+        else if (quizActive === false) {
+        clearInterval(interval);
+        timeScore = secondsLeft.value
+
+    }
+}, 1000);
 
 }
+
 
 function answerQuestion() {
     console.log(choiceResponse)
@@ -75,12 +94,16 @@ function answerQuestion() {
     else {
         correctOrIncorrect.textContent = "Incorrect!"
         correctOrIncorrect.setAttribute("class", "incorrect")
+        secondsLeft = secondsLeft - 10
     }
     questionNumber++
     startQuiz();
 }
 
-startBtn.addEventListener("click", startQuiz);
+startBtn.addEventListener("click", function() {
+    startQuiz();
+    startTimer();
+});
 choiceBtn1.addEventListener("click", function() {
     choiceResponse = 0;
     answerQuestion()
