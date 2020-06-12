@@ -36,8 +36,6 @@ function setMemory() {
 }
 setMemory()
 
-// localStorage.setItem("scores", JSON.stringify([{"initials": "ASS", "score": 70}]));
-
 // definitions of questions and answers 
 var questionList = [
     "Commonly used data types do not include:", 
