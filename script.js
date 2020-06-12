@@ -25,6 +25,17 @@ var secondsLeft = 75
 var interval
 var timeScore
 
+var scoreMemory = JSON.parse(localStorage.getItem("scores"));
+console.log(scoreMemory)
+function setMemory() {
+    if (localStorage.getItem("scores")===null) {
+        localStorage.setItem("scores", JSON.stringify([]))
+
+
+}
+}
+setMemory()
+
 // localStorage.setItem("scores", JSON.stringify([{"initials": "ASS", "score": 70}]));
 
 // definitions of questions and answers 
@@ -153,7 +164,7 @@ initialsForm.addEventListener("submit", function(event) {
         "initials": newInitials, 
         "score": secondsLeft};
     console.log(scoreObject)
-    var scoreMemory = JSON.parse(localStorage.getItem("scores"));
+    scoreMemory = JSON.parse(localStorage.getItem("scores"));
     console.log(scoreMemory);
     scoreMemory.push(scoreObject);
     console.log(scoreObject);
