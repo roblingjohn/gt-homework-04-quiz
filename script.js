@@ -1,4 +1,4 @@
-var higscoreLink = document.getElementById("highscore-link");
+var highscoreLink = document.getElementById("highscore-link");
 var timerText = document.getElementById("timer-text");
 var timerCountdown = document.getElementById("timer");
 var introBox = document.getElementById("intro");
@@ -52,7 +52,12 @@ function startQuiz() {
         quizActive = true
         // hides intro box and displays quiz box 
         introBox.setAttribute("class", "hide");
+        resultsBox.setAttribute("class", "hide");
+        highscoreBox.setAttribute("class", "hide");
+
         quizBox.setAttribute("class", "");
+        highscoreLink.setAttribute("class", "hide")
+        
     
         // insterts question text 
         questionText.textContent = questionList[questionNumber];
@@ -66,10 +71,13 @@ function startQuiz() {
     else {
         quizBox.setAttribute("class", "hide")
         resultsBox.setAttribute("class", "")
-        quizActive = false
         secondsLeft = secondsLeft + 1
         timerCountdown.innerText = secondsLeft
         scoreText.innerHTML = secondsLeft
+        quizActive = false
+        questionNumber = 0
+        correctOrIncorrect.setAttribute("class", "hide")
+
     }
 }
 
@@ -84,6 +92,10 @@ function startTimer() {
         else if (quizActive === false) {
         clearInterval(interval);
         timeScore = parseInt(secondsLeft) + 1
+        }
+        if (secondsLeft < 0){
+            questionNumber = 10;
+            startQuiz();
 
     }
 }, 1000);
@@ -158,4 +170,36 @@ initialsForm.addEventListener("submit", function(event) {
     }
     localStorage.setItem("scores", JSON.stringify(scoreMemory))
 
+})
+
+var areScoresDisplayed = false
+highscoreLink.addEventListener("click", function(){
+    highscoreLink.setAttribute("class", "hide");
+    introBox.setAttribute("class", "hide");
+    highscoreBox.setAttribute("class", "");
+    if (areScoresDisplayed === false){
+        areScoresDisplayed = true
+        var scoreMemory = JSON.parse(localStorage.getItem("scores"));
+        for (i = 0; i < scoreMemory.length; i++) {
+            console.log(i);
+            var highscoreDisplay = document.createElement("li")
+            highscoreList.append(highscoreDisplay)
+            highscoreDisplay.innerHTML = scoreMemory[i].initials + ": " + scoreMemory[i].score
+    }
+}
+})
+
+backBtn.addEventListener("click", function(){
+    highscoreBox.setAttribute("class", "hide");
+    resultsBox.setAttribute("class", "hide")
+    introBox.setAttribute("class", "")
+    highscoreLink.setAttribute("class", "col")
+    areScoresDisplayed = false
+    highscoreList.innerHTML = ""
+    timerCountdown.textContent = 75
+})
+
+clearBtn.addEventListener("click", function(){
+    localStorage.setItem("scores", JSON.stringify([ ]))
+    highscoreList.innerHTML = "";
 })
