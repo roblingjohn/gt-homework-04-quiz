@@ -40,17 +40,19 @@
         <div class="hide" id="results">
             <h1>All done!</h1>
             <p>Your final score is <span id="score"></span></p>
-            <p>Enter initials: <input type="text" id="input-initials"></p>
+            <p>Enter initials: 
+                <form id="initials-form" method="POST">
+                    <input type="text" id="input-initials">
+                </form></p>
         </div>
 
         <div class="hide" id="highscores">
             <h1>High scores:</h1>
             <ol id="highscore-list">
-                <li>Test</li>
                 <br>
-                <button class="btn btn-primary" id="back">Go back</button>
-                <button class="btn btn-primary" id="clear">Clear scores</button>
             </ol>
+            <button class="btn btn-primary" id="back">Go back</button>
+            <button class="btn btn-primary" id="clear">Clear scores</button>
         </div>
     </div>
     
