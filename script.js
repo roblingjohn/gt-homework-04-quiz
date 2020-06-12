@@ -13,13 +13,21 @@ var choiceBtn4 = document.getElementById("choice4");
 var correctOrIncorrect = document.getElementById("correct-or-incorrect");
 var resultsBox = document.getElementById("results");
 var scoreText = document.getElementById("score");
+var initialsForm = document.querySelector("#initials-form")
 var initalsInput = document.getElementById("input-initials");
-var highscoreBox = document.getElementById("highscore");
-var highscoreList = document.getElementById("highscore=list");
+var scoreObject = {}
+var highscoreBox = document.getElementById("highscores");
+var highscoreList = document.getElementById("highscore-list");
 var backBtn = document.getElementById("back");
 var clearBtn = document.getElementById("clear");
 var quizActive = false
+var secondsLeft = 75
+var interval
+var timeScore
 
+// localStorage.setItem("scores", JSON.stringify([{"initials": "ASS", "score": 70}]));
+
+// definitions of questions and answers 
 var questionList = [
     "Commonly used data types do not include:", 
     "The condition in an if/else statement is enclosed within_____.",
@@ -36,51 +44,74 @@ var choiceList = [
 ]
 var answerKey = [2, 2, 3, 2, 3]
 
-// console.log(choiceBtn.getAttribute("data-index-number"))
-
+// quiz starts on button click 
 var choiceNumber = 0
 var questionNumber = 0
 function startQuiz() {
     if (questionNumber < questionList.length) {
         quizActive = true
+        // hides intro box and displays quiz box 
         introBox.setAttribute("class", "hide");
         quizBox.setAttribute("class", "");
     
+        // insterts question text 
         questionText.textContent = questionList[questionNumber];
-        // for (i = 0; i < choiceList[questionNumber].length; i++){
-        //     var choiceNumber = i;
-        //     choiceBtn[i].textContent = choiceList[questionNumber][choiceNumber];
-        // }
-
+        // inserts answer chouces text 
         choiceBtn1.innerText = choiceList[questionNumber][0];
         choiceBtn2.innerText = choiceList[questionNumber][1];
         choiceBtn3.innerText = choiceList[questionNumber][2];
         choiceBtn4.innerText = choiceList[questionNumber][3];
     }
+    // if all questions answered, ends quiz, stops time, hides quiz box, and adds result box 
     else {
         quizBox.setAttribute("class", "hide")
         resultsBox.setAttribute("class", "")
         quizActive = false
+        secondsLeft = secondsLeft + 1
+        timerCountdown.innerText = secondsLeft
+        scoreText.innerHTML = secondsLeft
     }
+}
 
+// sets timer 
+function startTimer() {
+    secondsLeft = 74
+    interval = setInterval(function() {
+        if (quizActive === true) {
+            timerCountdown.innerText = secondsLeft
+            secondsLeft--
+        }
+        else if (quizActive === false) {
+        clearInterval(interval);
+        timeScore = parseInt(secondsLeft) + 1
+
+    }
+}, 1000);
 
 }
 
+// shows responses to correct and incorrect answers 
 function answerQuestion() {
     console.log(choiceResponse)
     if (choiceResponse === answerKey[questionNumber]){
         correctOrIncorrect.textContent = "Correct!"
-        correctOrIncorrect.setAttribute("class", "incorrect")
+        correctOrIncorrect.setAttribute("class", "correct")
     }
     else {
         correctOrIncorrect.textContent = "Incorrect!"
         correctOrIncorrect.setAttribute("class", "incorrect")
+        secondsLeft = secondsLeft - 10
+        // timerCountdown = timerCountdown - 10
     }
     questionNumber++
     startQuiz();
 }
 
-startBtn.addEventListener("click", startQuiz);
+// event listeners for buttons 
+startBtn.addEventListener("click", function() {
+    startQuiz();
+    startTimer();
+});
 choiceBtn1.addEventListener("click", function() {
     choiceResponse = 0;
     answerQuestion()
@@ -97,35 +128,34 @@ choiceBtn4.addEventListener("click", function() {
     choiceResponse = 3;
     answerQuestion();
     });
-// choiceBtn[answerKey[questionNumber]].addEventListener("click", answerQuestion);
+
+// event listener for initials entry 
+initialsForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+    var newInitials = initalsInput.value
+    resultsBox.setAttribute("class", "hide");
+    highscoreBox.setAttribute("class", "")
+    console.log(newInitials)
+    newInitials = newInitials.toUpperCase();
+    var scoreObject = {
+        "initials": newInitials, 
+        "score": secondsLeft};
+    console.log(scoreObject)
+    var scoreMemory = JSON.parse(localStorage.getItem("scores"));
+    console.log(scoreMemory);
+    scoreMemory.push(scoreObject);
+    console.log(scoreObject);
+    // localStorage.setItem("scores", JSON.stringify(scoreObject))
+    scoreMemory.sort((a, b) => (b.score > a.score) ? 1 : -1);
+    for (i = 0; i < scoreMemory.length; i++) {
+        console.log(i);
+        var highscoreDisplay = document.createElement("li")
+        highscoreList.append(highscoreDisplay)
+        highscoreDisplay.innerHTML = scoreMemory[i].initials + ": " + scoreMemory[i].score
 
 
-// Commonly used data types do not include:
-// 1. strings
-// 2. booleans
-// 3. alerts
-// 4. numbers
 
-// The condition in an if/else statement is enclosed within__.
-// 1. quotes
-// 2. curly brackets
-// 3 parentheses
-// 4. square brackets
+    }
+    localStorage.setItem("scores", JSON.stringify(scoreMemory))
 
-// Arrays in JavaScript can be used to store ____.
-// 1. numbers and strings
-// 2. other arrays
-// 3. booleans
-// 4. all of the above
-
-// Strings must be enclosed within ___ when being assigned to variables.
-// 1. commas
-// 2. curly brackets
-// 3. quotes
-// 4. parentheses
-
-// A very useful tool used during development and debugging for printing content to the debugger is:
-// 1. JavaScript
-// 2. terminal/bash
-// 3. for loops
-// 4. console.log
+})
